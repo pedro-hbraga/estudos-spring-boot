@@ -17,3 +17,5 @@ Maven  -> Gerenciamento de dependências
 Insomnia
 
 Utilizei também o Spring Initializr para gerar as dependências do projeto.
+
+Utilizo o padrão DTO - Data Transfer Object, ou seja, representar os dados, recebidos e enviados, em OBJETOS
