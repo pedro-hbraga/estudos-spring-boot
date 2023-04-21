@@ -1,2 +1,19 @@
 # estudos-spring-boot
 Estudos sobre Java e Spring Boot.
+
+Estudo realizado com instrução da formação da Alura de Java e Spring Boot.
+
+Objetivo: Desenvolver uma API REST  // Obs: Sem utilização de Front, totalmente focado em Back
+
+Tema: Clínica Médica
+
+Ferramentas:
+Spring Boot 3
+Java
+Lombok
+MySQL
+JPA/ Hibernate
+Maven  -> Gerenciamento de dependências 
+Insomnia
+
+Utilizei também o Spring Initializr para gerar as dependências do projeto.
