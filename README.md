@@ -15,7 +15,15 @@ MySQL
 JPA/ Hibernate
 Maven  -> Gerenciamento de dependências 
 Insomnia
+Migration
 
 Utilizei também o Spring Initializr para gerar as dependências do projeto.
 
 Utilizo o padrão DTO - Data Transfer Object, ou seja, representar os dados, recebidos e enviados, em OBJETOS
+
+RECORDS: DadosCadastroMedico, DadosEndereco
+
+Controllers:
+ControllerMedico
+POST
+Realiza a Insercao na base vollmed_api, table medicos
