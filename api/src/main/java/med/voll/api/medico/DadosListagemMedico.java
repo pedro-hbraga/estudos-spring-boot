@@ -1,6 +1,6 @@
 package med.voll.api.medico;
 
-// DTO
+// DTO PARA DEVOLVER SOMENTE AS INFORMACOES QUE SAO NECESSARIAS AO FRONT
 public record DadosListagemMedico(String nome, String email, String crm, Especialidade especialidade) {
 
     public DadosListagemMedico(Medico medico){
