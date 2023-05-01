@@ -2,10 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.validation.Valid;
 import med.voll.api.endereco.Endereco;
-import med.voll.api.medico.DadosCadastroMedico;
-import med.voll.api.medico.DadosListagemMedico;
-import med.voll.api.medico.Medico;
-import med.voll.api.medico.MedicoRepository;
+import med.voll.api.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,6 +21,7 @@ public class MedicoController {
     private MedicoRepository repository;
 
     //METODO POST  - Captando dados do Body em JSON
+    // INSERT
     @PostMapping
     @Transactional // do pack Spring, precisa de transacao ativa com BD -> TRANSACAO COM BANCO
     public void cadastrarMedico(@RequestBody @Valid DadosCadastroMedico dados){ //VEM DA REQUISICAO
@@ -32,7 +30,7 @@ public class MedicoController {
         repository.save(new Medico(dados)); // INSERT NO BANCO
     }
 
-    //METODO GET
+    //METODO GET - READ
     // LEITURA NAO PRECISA DE TRANSACAO ATIVA
     @GetMapping                                     //PageableDefault -> Sem o GET nao possuir parametros, ira seguir os informados aqui
     public Page<DadosListagemMedico> listarMedicos(@PageableDefault(size =1 , sort = {"nome"}) Pageable paginacao){
@@ -48,7 +46,18 @@ public class MedicoController {
         //return repository.findAll().stream()
         //  .map(DadosListagemMedico :: new) // CONVERSAO DE Medico PARA DadosListagemMedico, Necessario criar CONSTRUTOR que recebe Medico
         //  .toList();
+    }
 
+    // METODO PUT - UPDATE
+    @PutMapping
+    @Transactional
+    public void atualizarMedicos(@RequestBody @Valid DadosUpdateMedico updateMedico){
+
+        //Primeiro carregar os dados do medico desejado
+        var medico = repository.getReferenceById(updateMedico.id());
+
+        //Entao sobescrever os dados com informações atualizados
+        medico.atualizarInformacoes(updateMedico); // JPA ja detecta que ocorreu a mudança e atualiza a Base de Dados
     }
 
 }

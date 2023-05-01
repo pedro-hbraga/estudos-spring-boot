@@ -9,6 +9,8 @@ import med.voll.api.endereco.DadosEndereco;
 
 //record -> seria o equivalente as Props do .NET, assim nao precisamos digitar Getters
 // record contem apenas atributos, construtor e metodos de leitura (GETTERS), ou seja, SEM COMPORTAMENTO
+// Um DTO ajuda a prevenir Mass Assignment Attack, sendo equivalente ao SQLParameters, onde so expoe os dados que fazem sentido
+// a FUNCIONALIDADE do DTO
 public record DadosCadastroMedico(
         @NotBlank
         String nome,
