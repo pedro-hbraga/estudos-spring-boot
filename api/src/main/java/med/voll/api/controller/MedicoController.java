@@ -60,4 +60,12 @@ public class MedicoController {
         medico.atualizarInformacoes(updateMedico); // JPA ja detecta que ocorreu a mudança e atualiza a Base de Dados
     }
 
+    // Nao deletar, mas tornar INATIVO no Sistema (EXCLUSAO LOGICA)
+    // METODO DELETE
+    @DeleteMapping("/{id}") // ID vindo da URL, atraves de um parametro dinamico {}
+    @Transactional
+    public void deletarMedico(@PathVariable Long id){ // Avisando que Long id vem da URL
+        repository.deleteById(id); // Apaga da Base
+    }
+
 }
