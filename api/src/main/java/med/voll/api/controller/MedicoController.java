@@ -75,7 +75,7 @@ public class MedicoController {
         var medico = repository.getReferenceById(id);
         // Nao deletar, mas tornar INATIVO no Sistema (EXCLUSAO LOGICA)
         // Setar status para inativo
-        medico.excluir(); // JPA ira atualizar automaticamente
+        medico.excluir(); // JPA ira atualizar automaticamente, mas precisa atualizar tabela para conter a coluna status
 
 
     }
