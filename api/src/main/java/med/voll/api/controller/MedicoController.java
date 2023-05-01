@@ -38,8 +38,10 @@ public class MedicoController {
         // OBJETO PAGINACAO COMO PARAMETRO, DIRETO DO SPRING, ASSIM DEFINIMOS A QUANTIDADE DESEJADA
         // A quantidade desejada deve ser passada no /medicos?size=QTDDESEJADA
         //&page=PAGEDESEJADA concatenada a anterior, tras a pagina seguinte
-        return repository.findAll(paginacao).map(DadosListagemMedico :: new);
+       // return repository.findAll(paginacao).map(DadosListagemMedico :: new);
 
+        // Listando excluindo MEDICOS INATIVOS, status = false
+        return repository.findAllByStatusTrue(paginacao).map(DadosListagemMedico :: new);
         //var x = repository.findAll().stream().map(DadosListagemMedico :: new); // .map é uma transformacao, diferente do Dict
 
 
@@ -60,12 +62,22 @@ public class MedicoController {
         medico.atualizarInformacoes(updateMedico); // JPA ja detecta que ocorreu a mudança e atualiza a Base de Dados
     }
 
-    // Nao deletar, mas tornar INATIVO no Sistema (EXCLUSAO LOGICA)
+
     // METODO DELETE
     @DeleteMapping("/{id}") // ID vindo da URL, atraves de um parametro dinamico {}
     @Transactional
     public void deletarMedico(@PathVariable Long id){ // Avisando que Long id vem da URL
-        repository.deleteById(id); // Apaga da Base
+
+        // repository.deleteById(id); // Apaga da Base
+
+
+        // Carregar a entidade do banco de dados
+        var medico = repository.getReferenceById(id);
+        // Nao deletar, mas tornar INATIVO no Sistema (EXCLUSAO LOGICA)
+        // Setar status para inativo
+        medico.excluir(); // JPA ira atualizar automaticamente
+
+
     }
 
 }
